@@ -4,6 +4,13 @@ Analyze the unpacked size of an npm package with a simple, fast CLI.
 
 ```bash
 npx bundle-analyze
+
+Total unpacked size: 9 KB
+├── dist 6.14 KB (68.2%)
+│  └── index.cjs 6.14 KB (68.2%)
+├── package.json 1.32 KB (14.7%)
+├── LICENSE 1.04 KB (11.6%)
+└── README.md 511 B (5.5%)
 ```
 
 ### Options
