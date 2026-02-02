@@ -21,14 +21,14 @@
   "packageManager": "pnpm@10.17.1",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ieedan/bundle-analyzer.git"
+    "url": "git+https://github.com/ieedan/bundle-analyze.git"
   },
   "bugs": {
-    "url": "https://github.com/ieedan/bundle-analyzer/issues"
+    "url": "https://github.com/ieedan/bundle-analyze/issues"
   },
   "keywords": [
     "bundle",
-    "analyzer",
+    "analyze",
     "npm",
     "cli"
   ],

@@ -1,4 +1,4 @@
-# @jsrepo/bundle-analyzer
+# bundle-analyze
 
 ## 0.0.1
 
