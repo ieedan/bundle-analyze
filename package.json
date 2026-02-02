@@ -1,0 +1,54 @@
+{
+  "name": "bundle-analyze",
+  "description": "Analyze unpacked npm package size with a fast CLI.",
+  "version": "0.0.0",
+  "license": "MIT",
+  "author": "Aidan Bleser",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "bin": "./dist/index.cjs",
+  "files": [
+    "dist/**/*"
+  ],
+  "scripts": {
+    "build": "tsdown",
+    "dev": "tsdown --watch",
+    "check": "ultracite check && tsc --noEmit",
+    "start": "node ./dist/index.cjs",
+    "fix": "ultracite fix",
+    "ci:release": "pnpm build && changeset publish"
+  },
+  "packageManager": "pnpm@10.17.1",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ieedan/bundle-analyzer.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ieedan/bundle-analyzer/issues"
+  },
+  "keywords": [
+    "bundle",
+    "analyzer",
+    "npm",
+    "cli"
+  ],
+  "dependencies": {
+    "@npmcli/arborist": "^9.1.6",
+    "commander": "^14.0.3",
+    "npm-packlist": "^10.0.3",
+    "picocolors": "^1.1.1",
+    "zod": "^4.3.6"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.3.13",
+    "@changesets/cli": "^2.29.7",
+    "@svitejs/changesets-changelog-github-compact": "^1.2.0",
+    "@types/node": "^25.2.0",
+    "@types/npm-packlist": "^7.0.3",
+    "@types/npmcli__arborist": "^6.3.1",
+    "tsdown": "^0.20.1",
+    "typescript": "^5.9.3",
+    "ultracite": "7.1.3",
+    "pkg-pr-new": "^0.0.62"
+  }
+}
