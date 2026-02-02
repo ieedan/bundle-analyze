@@ -1,7 +1,7 @@
 {
   "name": "bundle-analyze",
   "description": "Analyze unpacked npm package size with a fast CLI.",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "license": "MIT",
   "author": "Aidan Bleser",
   "type": "module",
