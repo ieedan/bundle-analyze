@@ -59,6 +59,16 @@ interface TreeNode {
   isFile: boolean;
 }
 
+interface JsonTreeNode {
+  name: string;
+  path: string;
+  sizeBytes: number;
+  size: string;
+  percentage: number;
+  isFile: boolean;
+  children: JsonTreeNode[];
+}
+
 function buildTree(files: File[]): TreeNode {
   const root: TreeNode = {
     name: "",
@@ -134,6 +144,34 @@ function displayTree(
   }
 }
 
+function serializeTree(
+  node: TreeNode,
+  totalSize: number,
+  parentPath = ""
+): JsonTreeNode {
+  const percentage = totalSize === 0 ? 0 : (node.size / totalSize) * 100;
+  const currentPath = parentPath ? path.join(parentPath, node.name) : node.name;
+
+  const children = Array.from(node.children.values()).sort((a, b) => {
+    if (a.isFile !== b.isFile) {
+      return a.isFile ? 1 : -1;
+    }
+    return b.size - a.size;
+  });
+
+  return {
+    name: node.name,
+    path: currentPath,
+    sizeBytes: node.size,
+    size: displaySize(node.size),
+    percentage: Number(percentage.toFixed(1)),
+    isFile: node.isFile,
+    children: children.map((child) =>
+      serializeTree(child, totalSize, currentPath)
+    ),
+  };
+}
+
 async function runAnalyze(options: {
   cwd: string;
   failIfExceedsBytes?: number;
@@ -154,7 +192,21 @@ async function runAnalyze(options: {
   const totalSize = files.reduce((acc, file) => acc + file.stats.size, 0);
 
   if (options.json) {
-    console.log(JSON.stringify({ size: totalSize }));
+    const root = buildTree(files);
+    const children = Array.from(root.children.values()).sort((a, b) => {
+      if (a.isFile !== b.isFile) {
+        return a.isFile ? 1 : -1;
+      }
+      return b.size - a.size;
+    });
+
+    console.log(
+      JSON.stringify({
+        totalSizeBytes: totalSize,
+        totalSize: displaySize(totalSize),
+        entries: children.map((child) => serializeTree(child, totalSize)),
+      })
+    );
   } else {
     console.log(`Total unpacked size: ${displaySize(totalSize)}`);
 
